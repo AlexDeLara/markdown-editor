@@ -1,8 +1,13 @@
 import './App.css';
+import MarkdownEditor from './components/MarkdownEditor';
+import MarkdownPreviewer from './components/MarkdownPreviewer';
 
 function App() {
   return (
-    <h1>Hello World!</h1>
+    <>
+      <MarkdownEditor/>
+      <MarkdownPreviewer/>
+    </>
   );
 }
 
