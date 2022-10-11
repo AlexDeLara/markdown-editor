@@ -1,18 +1,30 @@
 import WindowBar from "./WindowBar";
 import { useDispatch } from "react-redux";
 import { updateTextInput } from "../features/textInput/textInput";
+import { useState } from "react";
 
 function MarkdownEditor() {
   const dispatch = useDispatch();
+
+  const [visibility, setVisibility] = useState(true);
 
   function handleChange(e) {
     dispatch(updateTextInput(e.target.value));
   }
 
+  function toggleVisibility() {
+    setVisibility(!visibility);
+  }
+
   return (
-    <div className="h-1/2 w-full">
-      <WindowBar windowName="Editor" expandIcon="X" />
-      <textarea onChange={handleChange}></textarea>
+    <div className={`${visibility ? "h-1/5" : null} w-1/2 flex flex-col items-center`}>
+      <WindowBar windowName="Editor" toggleVisibility={toggleVisibility} />
+      {visibility && (
+        <textarea
+          onChange={handleChange}
+          className="w-full h-full p-4 rounded-b focus:outline-0"
+        ></textarea>
+      )}
     </div>
   );
 }
