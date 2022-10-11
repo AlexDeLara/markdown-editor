@@ -2,18 +2,17 @@ import WindowBar from "./WindowBar";
 import { useDispatch } from "react-redux";
 import { updateTextInput } from "../features/textInput/textInput";
 import { useState } from "react";
+import { sampleMarkdown } from "../data/sampleMarkdown";
 
 function MarkdownEditor() {
-  const sampleMarkdown = fetch("./data/sampleMarkdown").then((response) =>
-    response.text()
-  );
-
   const dispatch = useDispatch();
 
   const [visibility, setVisibility] = useState(true);
+  const [value, setValue] = useState(sampleMarkdown);
 
   function handleChange(e) {
     dispatch(updateTextInput(e.target.value));
+    setValue(e.target.value);
   }
 
   function toggleVisibility() {
@@ -31,7 +30,7 @@ function MarkdownEditor() {
         <textarea
           onChange={handleChange}
           className="w-full h-full p-4 rounded-b focus:outline-0"
-          value={sampleMarkdown}
+          value={value}
         ></textarea>
       )}
     </div>
